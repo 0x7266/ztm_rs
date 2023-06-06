@@ -26,8 +26,10 @@ fn main() {
 
     for ticket in tickets {
         match ticket {
-            Ticket::Backstage(price, name) => println!("PRICE: {}\nNAME: {}\n\n", price, name),
-            Ticket::Vip(price, name) => println!("PRICE: {}\nNAME: {}\n\n", price, name),
+            Ticket::Backstage(price, holder) => {
+                println!("PRICE: {}\nHOLDER: {}\n\n", price, holder)
+            }
+            Ticket::Vip(price, holder) => println!("PRICE: {}\nHOLDER: {}\n\n", price, holder),
             Ticket::Standard(price) => println!("PRICE: {}\n\n", price),
         }
     }
