@@ -18,8 +18,8 @@ struct Person {
 }
 
 impl Person {
-    fn new(age: i32, name: &str, favorite_color: &str) -> Person {
-        Person {
+    fn new(age: i32, name: &str, favorite_color: &str) -> Self {
+        Self {
             age,
             name: name.to_string(),
             favorite_color: favorite_color.to_string(),
