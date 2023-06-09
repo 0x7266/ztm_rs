@@ -31,31 +31,67 @@ enum PowerState {
     Hibernate,
 }
 
-fn main() -> std::io::Result<()> {
-    let mut buffer = String::new();
-    std::io::stdin().read_line(&mut buffer)?;
-    print_state(convert_input(buffer));
-    Ok(())
+impl PowerState {
+    fn new(command: &str) -> Option<Self> {
+        match command.to_lowercase().trim() {
+            "off" => Some(PowerState::Off),
+            "sleep" => Some(PowerState::Sleep),
+            "reboot" => Some(PowerState::Reboot),
+            "shutdown" => Some(PowerState::Shutdown),
+            "hibernate" => Some(PowerState::Hibernate),
+            _ => None,
+        }
+    }
 }
 
-fn print_state(state: Result<PowerState, String>) {
+fn print_state(state: PowerState) {
     match state {
-        Ok(PowerState::Off) => println!("Off"),
-        Ok(PowerState::Sleep) => println!("Sleep"),
-        Ok(PowerState::Reboot) => println!("Reboot"),
-        Ok(PowerState::Shutdown) => println!("Shutdown"),
-        Ok(PowerState::Hibernate) => println!("Hibernate"),
-        Err(msg) => println!("{msg}"),
+        PowerState::Off => println!("Turning off"),
+        PowerState::Sleep => println!("Sleeping"),
+        PowerState::Reboot => println!("Rebooting"),
+        PowerState::Shutdown => println!("Shutting down"),
+        PowerState::Hibernate => println!("Hibernating"),
     }
 }
 
-fn convert_input(arg: String) -> Result<PowerState, String> {
-    match arg.to_lowercase().trim() {
-        "off" => Ok(PowerState::Off),
-        "sleep" => Ok(PowerState::Sleep),
-        "reboot" => Ok(PowerState::Reboot),
-        "shutdown" => Ok(PowerState::Shutdown),
-        "hibernate" => Ok(PowerState::Hibernate),
-        _ => Err(String::from("Not a valid command")),
-    }
+fn main() {
+    let mut buffer = String::new();
+    match std::io::stdin().read_line(&mut buffer) {
+        Ok(_) => match PowerState::new(&buffer) {
+            Some(state) => print_state(state),
+            None => println!("Not a valid command"),
+        },
+        Err(_) => println!("Something went wrong while reading user input"),
+    };
 }
+
+// ---------------------------------------------------------------------
+
+// fn main() -> std::io::Result<()> {
+//     let mut buffer = String::new();
+//     std::io::stdin().read_line(&mut buffer)?;
+//     print_state(convert_input(buffer));
+//     Ok(())
+// }
+
+// fn print_state(state: Result<PowerState, String>) {
+//     match state {
+//         Ok(PowerState::Off) => println!("Off"),
+//         Ok(PowerState::Sleep) => println!("Sleep"),
+//         Ok(PowerState::Reboot) => println!("Reboot"),
+//         Ok(PowerState::Shutdown) => println!("Shutdown"),
+//         Ok(PowerState::Hibernate) => println!("Hibernate"),
+//         Err(msg) => println!("{msg}"),
+//     }
+// }
+
+// fn convert_input(arg: String) -> Result<PowerState, String> {
+//     match arg.to_lowercase().trim() {
+//         "off" => Ok(PowerState::Off),
+//         "sleep" => Ok(PowerState::Sleep),
+//         "reboot" => Ok(PowerState::Reboot),
+//         "shutdown" => Ok(PowerState::Shutdown),
+//         "hibernate" => Ok(PowerState::Hibernate),
+//         _ => Err(String::from("Not a valid command")),
+//     }
+// }
