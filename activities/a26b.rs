@@ -46,30 +46,36 @@ mod math {
 
 fn main() {
     // Part 1: math functions
-    use math::*;
-    let result = {
-        let two_plus_two = add(2, 2);
-        let three = sub(two_plus_two, 1);
-        mul(three, three)
-    };
+    {
+        use math::*;
+        let result = {
+            let two_plus_two = add(2, 2);
+            let three = sub(two_plus_two, 1);
+            mul(three, three)
+        };
 
-    // Ensure we have a correct result.
-    assert_eq!(result, 9);
-    println!("(2 + 2 - 1) * 3 = {}", result);
+        // Ensure we have a correct result.
+        assert_eq!(result, 9);
+        println!("(2 + 2 - 1) * 3 = {}", result);
+    }
 
     // Part 2: string functions
-    let hello = {
-        let msg = "hello ";
-        let msg = msg::trim(msg);
-        msg::capitalize(msg)
-    };
-    let world = {
-        let msg = "world";
-        msg::exciting(msg)
-    };
-    let msg = format!("{}, {}", hello, world);
+    {
+        // not "using" * just for study purpose
+        use msg::{capitalize, trim};
+        let hello = {
+            let msg = "hello ";
+            let msg = trim(msg);
+            capitalize(msg)
+        };
+        let world = {
+            let msg = "world";
+            msg::exciting(msg)
+        };
+        let msg = format!("{}, {}", hello, world);
 
-    // Ensure we have a correct result.
-    assert_eq!(&msg, "Hello, world!");
-    println!("{}", msg);
+        // Ensure we have a correct result.
+        assert_eq!(&msg, "Hello, world!");
+        println!("{}", msg);
+    }
 }
