@@ -2,20 +2,20 @@ use std::collections::HashMap;
 mod greet {
     // if HashMap is going to be used within greet module, greet module must "use" because each module has it own version of different use statements
     use std::collections::HashMap;
-    fn hello() {
+    pub fn hello() {
         println!("hello");
     }
 
-    fn goodbye() {
+    pub fn goodbye() {
         println!("goodbye");
     }
 }
 
 mod math {
-    fn add(a: i32, b: i32) -> i32 {
+    pub fn add(a: i32, b: i32) -> i32 {
         a + b
     }
-    fn sub(a: i32, b: i32) -> i32 {
+    pub fn sub(a: i32, b: i32) -> i32 {
         a - b
     }
 }
@@ -25,5 +25,5 @@ fn main() {
     use greet::hello;
     hello();
     greet::goodbye();
-    math::add(1, 1);
+    println!("{}", math::add(1, 1));
 }
