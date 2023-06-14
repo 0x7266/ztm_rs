@@ -47,7 +47,5 @@ fn main() {
         game: VideoGame::PlayStation,
     };
     board_game.game_info();
-    board_game.game.name();
     video_game.game_info();
-    video_game.game.name();
 }
