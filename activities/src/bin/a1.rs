@@ -13,19 +13,12 @@ fn main() {
     let last_name = "Doe";
     print_first_name(first_name);
     print_last_name(last_name);
-    println!(
-        "Full name: {} {}",
-        print_first_name(&first_name),
-        print_last_name(&last_name)
-    );
 }
 
 fn print_first_name(first_name: &str) -> String {
     println!("{}", first_name);
-    String::from(first_name)
 }
 
 fn print_last_name(last_name: &str) -> String {
     println!("{}", last_name);
-    String::from(last_name)
 }
