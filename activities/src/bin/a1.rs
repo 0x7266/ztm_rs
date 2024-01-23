@@ -19,8 +19,6 @@ fn print_first_name(first_name: &str, logger: &mut dyn Logger) {
     logger.log(first_name.to_string());
 }
 
-fn print_last_name(last_name: &str) -> String {
-    println!("{}", last_name);
 fn print_last_name(last_name: &str, logger: &mut dyn Logger) {
     logger.log(last_name.to_string());
 }
