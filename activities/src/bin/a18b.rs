@@ -76,3 +76,14 @@ fn main() -> Result<(), String> {
     peter.print_access()?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_manager_access() {
+        let employee = Employee::new(Role::Manager, Status::Employed);
+        assert_eq!(Ok("✅ Access alowed".to_string()), employee.try_access());
+    }
+}
