@@ -9,7 +9,7 @@
 // * Use the debug token "{:?}" to print out the information
 // * Use the compiler to guide you to the correct generic constraints needed
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 enum ServicePriority {
     High,
     Standard,
@@ -27,7 +27,7 @@ impl Priority for ImportantGuest {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 struct Guest;
 impl Priority for Guest {
     fn get_priority(&self) -> ServicePriority {
@@ -58,4 +58,15 @@ fn main() {
     let guest = Guest;
     print_guest_and_priority(guest);
     print_guest_and_priority(ImportantGuest);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_priority() {
+        let guest = Guest;
+        assert_eq!(ServicePriority::Standard, guest.get_priority());
+    }
 }
