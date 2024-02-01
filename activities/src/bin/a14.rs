@@ -48,3 +48,14 @@ fn main() {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_new_person() {
+        let p = Person::new(30, "John", "Red");
+        assert_eq!(p.favorite_color, "Red");
+    }
+}
