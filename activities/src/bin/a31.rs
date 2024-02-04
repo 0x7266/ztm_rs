@@ -56,6 +56,17 @@ fn main() {
     println!("{}", calculate_cost(order));
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_carpet_cost() {
+        let carpet = Carpet(50.);
+        assert_eq!(carpet.get_cost(), carpet.0 * 10.);
+    }
+}
+
 // PLAYING AROUND WITH ENUMS
 // trait Cost {
 //     fn get_cost(&self) -> f64;
